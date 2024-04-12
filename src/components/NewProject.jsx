@@ -1,6 +1,11 @@
-import Input from "./Input"
+import { useRef } from "react";
+
+import Input from "./Input";
 
 export default function NewProject() {
+    const title = useRef();
+    const description = useRef();
+    const dueDate = useRef();
     return(
         <div className="w-[35rem] mt-16">
             <menu className="flex items-center justify-end gap-4 my-4">
@@ -15,7 +20,7 @@ export default function NewProject() {
             <div>
                 <Input inputType={'text'} label={'Title'}></Input>
                 <Input inputType={'textarea'} isTextarea label={'Description'}></Input>
-                <Input inputType={'date'} label={'Date'}></Input>
+                <Input inputType={'date'} label={'Due Date'}></Input>
             </div>
         </div>
     )
