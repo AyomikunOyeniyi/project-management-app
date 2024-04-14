@@ -11,6 +11,9 @@ function App() {
     setIsAddBtnClicked(true);
   }
 
+  function handleCancelAddProject() {
+    setIsAddBtnClicked(false);
+  }
   function handleAddProject(projectData) {
     const newProject = {
       ...projectData,
@@ -27,7 +30,7 @@ function App() {
   let content;
 
   if (isAddBtnClicked) {
-    content = <NewProject onAdd={handleAddProject}></NewProject>
+    content = <NewProject onAdd={handleAddProject} onCancel={handleCancelAddProject}></NewProject>
   } else {
     content = <NoProjectSelected onAddProject={handleStartAddProject}></NoProjectSelected>
   }
