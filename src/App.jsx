@@ -5,22 +5,36 @@ import NoProjectSelected from "./components/NoProjectSelected";
 
 function App() {
   const [isAddBtnClicked, setIsAddBtnClicked] = useState(false);
+  const [projects, setProjects] = useState([]);
 
-  function handleAddProject() {
+  function handleStartAddProject() {
     setIsAddBtnClicked(true);
   }
 
+  function handleAddProject(projectData) {
+    const newProject = {
+      ...projectData,
+      id: Math.random()
+    };
+
+    
+    const prevProjects = [...projects];
+    setProjects(() => [...prevProjects, newProject]);
+    setIsAddBtnClicked(false);
+  }
+
+  
   let content;
 
   if (isAddBtnClicked) {
-    content = <NewProject></NewProject>
+    content = <NewProject onAdd={handleAddProject}></NewProject>
   } else {
-    content = <NoProjectSelected onAddProject={handleAddProject}></NoProjectSelected>
+    content = <NoProjectSelected onAddProject={handleStartAddProject}></NoProjectSelected>
   }
 
   return (
     <main className="h-screen my-8 flex gap-8">
-      <Sidebar onAddProject={handleAddProject}></Sidebar>
+      <Sidebar onAddProject={handleStartAddProject} projects = {projects}></Sidebar>
       {content}
     </main>
   );
